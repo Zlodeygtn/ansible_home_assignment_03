@@ -1,0 +1,4 @@
+Welcome to my web server! <br>
+The server name is <b>{{ ansible_facts.hostname }}</b> <br>
+The server is running under <b>{{ ansible_facts.os_family }}</b> family and OS <b>{{ ansible_facts.distribution }}</b> <b>{{ ansible_facts.distribution_version }}</b> <br>
+This host uses IP address <b>{{ ansible_facts.default_ipv4.address }}</b> 

@@ -1,0 +1,5 @@
+---
+# vars file for 01_Install_Apache_role
+     ports:
+      - 80
+      - 443

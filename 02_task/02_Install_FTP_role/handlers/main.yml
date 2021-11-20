@@ -1,0 +1,11 @@
+---
+# handlers file for 02_Install_FTP_role
+    - name: Restart firewalld service
+      service:
+        name: "{{ fw_config.service }}"
+        state: restarted
+
+    - name: Restart FTP
+      service:
+        name: "{{ ftp_server }}"
+        state: restarted

@@ -1,0 +1,5 @@
+- name: Install & Configure Apache
+  hosts: nodes
+  gather_facts: yes
+  roles:
+    - 01_Install_Apache_role

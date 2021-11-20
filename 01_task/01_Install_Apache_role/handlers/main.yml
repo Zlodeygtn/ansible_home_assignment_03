@@ -1,0 +1,11 @@
+---
+# handlers file for 01_Install_Apache_role
+    - name: Restart firewalld service
+      service:
+        name: firewalld 
+        state: restarted
+
+    - name: Restart Apache
+      service:
+        name: httpd
+        state: restarted

@@ -1,0 +1,15 @@
+anonymous_enable={{ ftp_config.anonymous_enable }}
+local_enable={{ ftp_config.local_enable }}
+write_enable={{ ftp_config.write_enable }}
+local_umask={{ ftp_config.local_umask }}
+anon_upload_enable={{ ftp_config.anon_upload_enable }}
+anon_mkdir_write_enable={{ ftp_config.anon_mkdir_write_enable }}
+dirmessage_enable={{ ftp_config.dirmessage_enable }}
+xferlog_enable={{ ftp_config.xferlog_enable }}
+connect_from_port_20={{ ftp_config.connect_from_port_20 }}
+xferlog_std_format={{ ftp_config.xferlog_std_format }}
+idle_session_timeout={{ ftp_config.idle_session_timeout }}
+ftpd_banner=Welcome to {{ ansible_fqdn }} FTP service.
+listen={{ ftp_config.listen }}
+pam_service_name={{ ftp_config.pam_service_name }}
+userlist_enable={{ ftp_config.userlist_enable }}

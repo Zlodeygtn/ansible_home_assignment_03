@@ -1,0 +1,28 @@
+---
+# tasks file for 01_Install_Apache_role
+    - name: Installing {{package}} package
+      yum:
+        name: "{{package}}"
+        state: present
+
+    - name: Starting {{service}} service
+      service:
+        name: "{{service}}"
+        state: started
+
+    - name: Open {{ports}} for web-server access
+      firewalld:
+        port: "{{item}}/tcp"
+        permanent: true
+        state: enabled
+      loop: "{{ports}}"
+      notify:
+        - Restart firewalld service
+
+    - name: Copying index.html
+      template:
+        src: index.j2
+        dest: /var/www/html/index.html
+      notify:
+       - Restart Apache
+...

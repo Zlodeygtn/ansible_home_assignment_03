@@ -1,0 +1,5 @@
+- name: Install & Configure FTP
+  hosts: nodes
+  gather_facts: yes
+  roles:
+    - 02_Install_FTP_role

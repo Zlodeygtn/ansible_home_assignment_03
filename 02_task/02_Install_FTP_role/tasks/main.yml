@@ -1,0 +1,58 @@
+---
+# tasks file for 02_Install_FTP_role
+    - name: Install libsemanage-python
+      yum:
+        name: python3-libsemanage
+        state: present
+
+    - name: Installing {{ ftp_server }} package
+      yum:
+        name: "{{ ftp_server }}"
+        state: present
+
+    - name: Starting {{ ftp_server }} service
+      service:
+        name: "{{ ftp_server }}"
+        state: started
+
+    - name: Open {{ fw_config.ports }} for web-server access
+      firewalld:
+        port: "{{ item }}"
+        permanent: true
+        state: enabled
+      loop: "{{ fw_config.ports }}"
+      notify:
+        - Restart firewalld service
+
+    - name: Create upload directory
+      file:
+        path: /var/ftp/pub/upload
+        owner: ansible
+        state: directory
+        mode: 0757
+      notify:
+       - Restart FTP 
+
+    - name: Copying ftp config
+      template:
+        src: vsftpd.j2
+        dest: /etc/vsftpd/vsftpd.conf
+      notify:
+       - Restart FTP
+ 
+    - name: Set SE boolean allow_ftpd_full_access
+      seboolean:
+        name: allow_ftpd_full_access
+        state: yes
+        persistent: yes
+      notify:
+       - Restart FTP  
+
+    - name: Set SE boolean allow_ftpd_anon_write
+      seboolean:
+        name: allow_ftpd_anon_write
+        state: yes
+        persistent: yes
+      notify:
+       - Restart FTP      
+...
